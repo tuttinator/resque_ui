@@ -389,3 +389,6 @@ To bring this up to scratch and be Rails 3.2.x ready:
 - Fix assets to use assets pipeline
 - Investigate what is needed for the ability to use the mount method in the routes.rb file
 - Test coverage for any changes
+- Fix this:
+```DEPRECATION WARNING: Passing the format in the template name is deprecated. 
+Please pass render with :formats => [:html] instead. (called from poll at app/controllers/resque_controller.rb:30)```
