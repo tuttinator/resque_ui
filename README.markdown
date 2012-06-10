@@ -19,6 +19,13 @@ Once installed, you now have a resque controller, so you can get to the ui with:
 If you have your default routes disabled, which you should if you have a RESTful API, then you'll need to add this to
 the top of your routes.rb file.
 
+For Rails 3.1.x +
+
+    # Resque UI
+    match 'resque(/:action(/:id))', :controller => 'resque'
+
+For old Rails 3.0.x branch
+
     # Resque UI
     map.connect 'resque/:action/:id', :controller => 'resque'
 
@@ -371,3 +378,14 @@ Copyright (c) 2010 Kevin Tyll, released under the MIT license
 Thanks to Karl Baum for doing the original heavy lifting for converting this to a rails engine for rails 3.
 
 Much thanks goes to Brian Ketelsen for the ideas for the improved functionality for the UI.
+
+
+TO DO
+-----
+
+To bring this up to scratch and be Rails 3.2.x ready:
+
+- Investigate ```undefined method `statuses' for Resque::Status:Class```
+- Fix assets to use assets pipeline
+- Investigate what is needed for the ability to use the mount method in the routes.rb file
+- Test coverage for any changes
