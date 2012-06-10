@@ -12,12 +12,6 @@ class ResqueController < ApplicationController
 
   before_filter :get_cleaner, :only => [:cleaner, :cleaner_exec, :cleaner_list, :cleaner_stale, :cleaner_dump]
 
-  verify :method => :post, :only => [:clear_failures, :clear_failure, :requeue_failure, :stop_worker, :restart_worker,
-                                     :start_worker, :schedule_requeue, :remove_from_schedule, :add_scheduled_job,
-                                     :start_scheduler, :stop_scheduler, :requeue_failures_in_class,
-                                     :kill, :clear_statuses, :cleaner_exec, :cleaner_stale],
-         :render => {:text => "<p>Please use the POST http method to post data to this API.</p>".html_safe}
-
 
   def index
     redirect_to(:action => 'overview')
