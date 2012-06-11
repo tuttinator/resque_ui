@@ -163,30 +163,30 @@ class ResqueController < ApplicationController
   def statuses
     @start = params[:start].to_i
     @end = @start + (params[:per_page] || 20)
-    @statuses = Resque::Status.statuses(@start, @end)
-    @size = Resque::Status.status_ids.size
+    @statuses = Resque::Plugins::Status::Hash.statuses(@start, @end)
+    @size = Resque::Plugins::Status::Hash.status_ids.size
     if params[:format] == 'js'
       render :text => @statuses.to_json
     end
   end
 
   def clear_statuses
-    Resque::Status.clear
+    Resque::Plugins::Status.clear
     redirect_to(:action => 'statuses')
   end
 
   def status
-    @status = Resque::Status.get(params[:id])
+    @status = Resque::Plugins::Status::Hash.get(params[:id])
     if params[:format] == 'js'
       render :text => @status.to_json
     end
   end
 
   def kill
-    Resque::Status.kill(params[:id])
-    s = Resque::Status.get(params[:id])
+    Resque::Plugins::Status::Hash.kill(params[:id])
+    s = Resque::Plugins::Status::Hash.get(params[:id])
     s.status = 'killed'
-    Resque::Status.set(params[:id], s)
+    Resque::Plugins::Status::Hash.set(params[:id], s)
     redirect_to(:action => 'statuses')
   end
 
