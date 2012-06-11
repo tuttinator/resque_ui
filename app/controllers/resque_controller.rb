@@ -35,8 +35,8 @@ class ResqueController < ApplicationController
 
     @start = params[:start].to_i
     @end = @start + (params[:per_page] || 20)
-    @statuses = Resque::Status.statuses(@start, @end)
-    @size = Resque::Status.status_ids.size
+    @statuses = Resque::Plugins::Status::Hash.statuses(@start, @end)
+    @size = Resque::Plugins::Status::Hash.status_ids.size
 
     render(:text => (render_to_string(:action => 'statuses.html', :layout => false)))
   end
